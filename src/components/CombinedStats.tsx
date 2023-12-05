@@ -42,28 +42,28 @@ const CombinedStats = () => {
         const atkPowers: any[] = [];
         const bonusAtkPowers: any[] = [];
 
-        sortedData.STR.map(el => {
+        sortedData.STR.forEach(el => {
             if (el.Point === currSTRIndex) {
                 stats.push(el.Stat);
                 atkPowers.push(el.Stat.AttackPowers);
                 bonusAtkPowers.push(el.Stat.BonusAttackPowers);
             }
         })
-        sortedData.DEX.map(el => {
+        sortedData.DEX.forEach(el => {
             if (el.Point === currDEXIndex) {
                 stats.push(el.Stat);
                 atkPowers.push(el.Stat.AttackPowers);
                 bonusAtkPowers.push(el.Stat.BonusAttackPowers);
             }
         })
-        sortedData.INT.map(el => {
+        sortedData.INT.forEach(el => {
             if (el.Point === currINTIndex) {
                 stats.push(el.Stat);
                 atkPowers.push(el.Stat.AttackPowers);
                 bonusAtkPowers.push(el.Stat.BonusAttackPowers);
             }
         })
-        sortedData.PER.map(el => {
+        sortedData.PER.forEach(el => {
             if (el.Point === currPERIndex) {
                 stats.push(el.Stat);
                 atkPowers.push(el.Stat.AttackPowers);
