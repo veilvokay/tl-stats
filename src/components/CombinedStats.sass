@@ -1,8 +1,6 @@
 @use '../styles/colors'
 .combined-stats
-    margin: 36px
     padding: 24px
-    // width: auto
     display: flex
     justify-content: space-between
     align-items: flex-start
@@ -10,7 +8,7 @@
     background-color: colors.$dark-blue
     &__ui
         // width: 256px
-        flex-basis: 25%
+        flex-basis: 15%
         height: auto
         background-color: colors.$light-blue
         border-radius: 12px
@@ -36,16 +34,33 @@
                         font-size: 24px
                         color: colors.$white
     &__display
-        flex-basis: 65%
+        flex-basis: 82%
         height: auto
         background-color: colors.$light-blue
         border-radius: 12px
         padding: 36px
-        .display__list
+        display: flex
+        justify-content: space-between
+        .display
+            &__group
+                flex-basis: 32%
+                display: flex
+                flex-direction: column
+            &__title
+                width: 100%
+                color: colors.$white
+                text-align: center
+        .list
             margin: 0
-            padding: 0
+            padding: 8px 8px
             list-style: none
             &-item
+                background-color: #8181810e
+                padding: 2px 8px
                 margin-bottom: 6px
+                border-radius: 8px
+                display: flex
+                justify-content: space-between
+                align-items: center
                 font-size: 18px
                 color: colors.$white

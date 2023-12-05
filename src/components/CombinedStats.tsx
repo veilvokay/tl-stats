@@ -13,8 +13,9 @@ const CombinedStats = () => {
         PER: []
     });
     const currSortedData = useRef(sortedData);
-    const [assembledData, setAssembledData] = useState<Stat>({});
-    const assembledDataRef = useRef(assembledData);
+    const assembledDataRef = useRef({});
+    const assembledAtkDataRef = useRef({});
+    const assembledBonusAtkDataRef = useRef({});
     const titleSTR = useRef(trimStatName(EStatType.STR));
     const titleDEX = useRef(trimStatName(EStatType.DEX));
     const titleINT = useRef(trimStatName(EStatType.INT));
@@ -38,32 +39,47 @@ const CombinedStats = () => {
     // SUM UP STATS
     useEffect(() => {
         const stats: Stat[] = [];
+        const atkPowers: any[] = [];
+        const bonusAtkPowers: any[] = [];
 
         sortedData.STR.map(el => {
             if (el.Point === currSTRIndex) {
                 stats.push(el.Stat);
+                atkPowers.push(el.Stat.AttackPowers);
+                bonusAtkPowers.push(el.Stat.BonusAttackPowers);
             }
         })
         sortedData.DEX.map(el => {
             if (el.Point === currDEXIndex) {
                 stats.push(el.Stat);
+                atkPowers.push(el.Stat.AttackPowers);
+                bonusAtkPowers.push(el.Stat.BonusAttackPowers);
             }
         })
         sortedData.INT.map(el => {
             if (el.Point === currINTIndex) {
                 stats.push(el.Stat);
+                atkPowers.push(el.Stat.AttackPowers);
+                bonusAtkPowers.push(el.Stat.BonusAttackPowers);
             }
         })
         sortedData.PER.map(el => {
             if (el.Point === currPERIndex) {
                 stats.push(el.Stat);
+                atkPowers.push(el.Stat.AttackPowers);
+                bonusAtkPowers.push(el.Stat.BonusAttackPowers);
             }
         })
 
-        const merged = mergeObjects(stats);
-        assembledDataRef.current = merged;
+        const mergedGeneral = mergeObjects(stats);
+        assembledDataRef.current = mergedGeneral;
 
-        // console.log(assembledDataRef.current, ' curr');
+        const mergedAtk = mergeObjects(atkPowers);
+        assembledAtkDataRef.current = mergedAtk
+
+        const mergedBonusAtk = mergeObjects(bonusAtkPowers);
+        assembledBonusAtkDataRef.current = mergedBonusAtk;        
+        
     }, [sortedData, currSTRIndex, currDEXIndex, currINTIndex, currPERIndex])
 
     useEffect(() => {
@@ -95,28 +111,96 @@ const CombinedStats = () => {
         }
       }
 
-    const displayStats = () => {
+    const displayAtkStats = () => {
         const data: any = [];
-        Object.entries(assembledDataRef.current).forEach(([key, value]) => {
-            console.log(key, typeof value);
-            if (typeof value !== 'object') {
-                console.log(key, value);
-                
-                data.push({[key]: value})
-            }
-
-            return <></>
-            
+        Object.entries(assembledAtkDataRef.current).forEach(([key, value]) => {
+            data.push({[key]: value})
         })
         
         return (
-            <ul className='display__list'>
-                {
-                    data.map((entry: object) => {
-                        return <li className='display__list-item'>{Object.keys(entry)} : {Object.values(entry)}</li>
-                    })
-                }
-            </ul>
+            <div className='display__group'>
+                <h2 className='display__title'>
+                    Attack Power
+                </h2>
+                <ul className='display-atk__list list'>
+                    {
+                        data.map((entry: object) => {
+                            return (
+                            <li className='display-atk__list-item list-item'>
+                                <span className='title'>
+                                    {Object.keys(entry)}
+                                </span>
+                                <span className='value'>
+                                    {Object.values(entry)}
+                                </span>
+                            </li>)
+                        })
+                    }
+                </ul>
+            </div>
+        ) 
+    };
+    const displayBonusAtkStats = () => {
+        const data: any = [];
+        Object.entries(assembledBonusAtkDataRef.current).forEach(([key, value]) => {
+            data.push({[key]: value})
+        })
+        
+        return (
+            <div className='display__group'>
+                <h2 className='display__title'>
+                    Bonus Attack Power
+                </h2>
+                <ul className='display-b-atk__list list'>
+                    {
+                        data.map((entry: object) => {
+                            return (
+                                <li className='display-b-atk__list-item list-item'>
+                                    <span className='title'>
+                                        {Object.keys(entry)}
+                                    </span>
+                                    <span className='value'>
+                                        {Object.values(entry)}
+                                    </span>
+                                </li>
+                            )
+                        })
+                    }
+                </ul>
+            </div>
+        ) 
+    };
+
+    const displayGeneralStats = () => {
+        const data: any = [];
+        Object.entries(assembledDataRef.current).forEach(([key, value]) => {
+            if (typeof value !== 'object') {
+                data.push({[key]: value})
+            }
+        })
+        
+        return (
+            <div className='display__group'>
+                <h2 className='display__title'>
+                    General
+                </h2>
+                <ul className='display__list list'>
+                    {
+                        data.map((entry: object) => {
+                            return (
+                                <li className='display__list-item list-item'>
+                                    <span className='title'>
+                                        {Object.keys(entry)}
+                                    </span>
+                                    <span className='value'>
+                                        {Object.values(entry)}
+                                    </span>
+                                </li>
+                            )
+                        })
+                    }
+                </ul>
+            </div>
         ) 
         
     }
@@ -160,7 +244,9 @@ const CombinedStats = () => {
                 </ul>
             </div>
             <div className="combined-stats__display">
-                {displayStats()}
+                {displayAtkStats()}
+                {displayBonusAtkStats()}
+                {displayGeneralStats()}
             </div>
         </div>
     )
