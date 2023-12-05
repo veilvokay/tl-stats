@@ -1,6 +1,8 @@
 import { FC, useEffect, useRef, useState } from "react";
 import { IStatsData } from "../bff/fetch-stats";
 import { getDeepKeys, trimStatName } from "../helpers/helpers";
+import './ChangeStat.sass';
+import Button from "./layout/Button";
 
 type ChangeStatProps = {
   specificStat: IStatsData[],
@@ -94,31 +96,33 @@ const ChangeStat: FC<ChangeStatProps> = ({specificStat}) => {
   
   return (
     <div className="change-stat__wrapper">
-      <h1>{statTitle}</h1>
-      <p>{currStatIndex + 1}</p>
-      <button onClick={decrement}>-</button>
-      <button onClick={increment}>+</button>
-      <ul className="atk-powers" style={{listStyle: 'none'}}>
+      <h1 className="title">{statTitle}</h1>
+      <p className="current-stat">{currStatIndex + 1}</p>
+      <div className="button-group">
+        <Button onClick={decrement} title="-" btnStyle='square' />
+        <Button onClick={increment} title="+" btnStyle='square' />
+      </div>
+      <ul className="list atk-powers" style={{listStyle: 'none'}}>
         {Object.entries(attackPairs).map(([key, value], i) => (
           <>
             {/* @ts-ignore */}
-            <li>{key} {value}</li>
+            <li className="list-item">{key} {value}</li>
           </>
         ))}
       </ul>
-      <ul className="b-atk-powers" style={{listStyle: 'none'}}>
+      <ul className="list b-atk-powers" style={{listStyle: 'none'}}>
         {Object.entries(bonusAttackPairs).map(([key, value], i) => (
           <>
             {/* @ts-ignore */}
-            <li>{key} {value}</li>
+            <li className="list-item">{key} {value}</li>
           </>
         ))}
       </ul>
-      <ul className="powers" style={{listStyle: 'none'}}>
+      <ul className="list powers" style={{listStyle: 'none'}}>
         {Object.entries(keyValuePairs).map(([key, value], i) => (
           <>
             {/* @ts-ignore */}
-            <li>{key} {value}</li>
+            <li className="list-item">{key} {value}</li>
           </>
         ))}
       </ul>

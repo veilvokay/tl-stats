@@ -1,0 +1,51 @@
+@use '../styles/colors'
+.combined-stats
+    margin: 36px
+    padding: 24px
+    // width: auto
+    display: flex
+    justify-content: space-between
+    align-items: flex-start
+    border-radius: 16px
+    background-color: colors.$dark-blue
+    &__ui
+        // width: 256px
+        flex-basis: 25%
+        height: auto
+        background-color: colors.$light-blue
+        border-radius: 12px
+        padding: 12px
+        .ui__list
+            margin: 0
+            padding: 0
+            list-style: none
+            &-item
+                margin-bottom: 36px
+                width: 100%
+                .title
+                    margin: 0 0 12px 0
+                    width: 100%
+                    text-align: center
+                    color: colors.$white
+                .buttons-wrapper
+                    display: flex
+                    justify-content: space-evenly
+                    align-items: center
+                    .current-stat
+                        display: block
+                        font-size: 24px
+                        color: colors.$white
+    &__display
+        flex-basis: 65%
+        height: auto
+        background-color: colors.$light-blue
+        border-radius: 12px
+        padding: 36px
+        .display__list
+            margin: 0
+            padding: 0
+            list-style: none
+            &-item
+                margin-bottom: 6px
+                font-size: 18px
+                color: colors.$white

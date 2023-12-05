@@ -71,7 +71,7 @@ export type Stat = {
 
 export interface IStatsData {
     Point: number,
-    Stat?: Stat,
+    Stat: Stat,
     Type: TStatType[EStatType.STR] | TStatType[EStatType.DEX] | TStatType[EStatType.INT] | TStatType[EStatType.PER],
 }
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { EStatType, ISortedStats, IStatsData } from '../../bff/fetch-stats';
 import dataJSON from '../../mocks/stats.json';
-import ChangeStat from '../ChangeStat';
+import CombinedStats from '../CombinedStats';
 import './page.sass';
 
 interface ChangeStatsWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -27,13 +27,16 @@ const Page = () => {
 
   return (
     <div className="page">
-        {sortedData && (
+        {/* {sortedData && (
             <ChangeStatsWrapper>
                 <ChangeStat specificStat={sortedData?.STR} />
                 <ChangeStat specificStat={sortedData?.DEX} />
                 <ChangeStat specificStat={sortedData?.INT} />
                 <ChangeStat specificStat={sortedData?.PER} />
             </ChangeStatsWrapper>
+        )} */}
+        {sortedData && (
+            <CombinedStats />
         )}
     </div>
   )

@@ -27,3 +27,22 @@ export const getDeepValuesForKeys = (keys: string[], obj: any) => {
     })
     return keyValuePairs;
 }
+
+export const mergeObjects = (data: {}[]) => {
+    const result = {};
+
+    data.forEach(object => {
+        for (let [key, value] of Object.entries(object)) {
+            // @ts-ignore
+            if (result[key] && typeof result[key] !== 'object') {
+                // @ts-ignore
+                result[key] += value;
+            } else {
+                // @ts-ignore
+                result[key] = value;
+            }
+        }
+    })
+
+    return result;
+}
